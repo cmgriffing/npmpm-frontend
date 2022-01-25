@@ -3,4 +3,9 @@
 
 .input-wrapper {
   text-align: left;
+  width: 360px;
+}
+
+.feedback-wrapper {
+  width: 360px;
 }
