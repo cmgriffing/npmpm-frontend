@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Luckiest+Guy&display=swap");
+
+* {
+  font-family: "Dongle", sans-serif;
+  font-size: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Luckiest Guy", cursive;
+  margin: 0;
+}
+
+body {
+  background-image: linear-gradient(139deg, #fed6af, #ffc5ad, #f3b9bb, #f3adff);
+}
+
+.page-wrapper {
+  height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header {
+  height: 60px;
+}
+
+.footer {
+  height: 40px;
+}
+
+.underlined::after {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 100%;
+  background-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
+}
+
+.underlined-subtle {
+  line-height: 80%;
+}
+
+.underlined-subtle::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+/*
+	Use in conjunction with .sr-only to only display content when it's focused.
+	@note Useful for skip links
+	@see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+	@note Based on a HTML5 Boilerplate technique, included in Bootstrap
+	@note Fixed a bug with position: static on iOS 10.0.2 + VoiceOver
+		@author Sylvain Pigeard
+		@see https://github.com/twbs/bootstrap/issues/20732
+*/
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  width: auto !important;
+  white-space: normal !important;
+}

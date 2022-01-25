@@ -1,0 +1,15 @@
+.high-scores {
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+}
+
+.list-wrapper {
+  margin: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
