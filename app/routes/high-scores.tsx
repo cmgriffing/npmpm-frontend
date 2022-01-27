@@ -1,65 +1,36 @@
+import { LoaderFunction, useLoaderData } from "remix";
+import { axios } from "../utils/axios";
 import styles from "../styles/high-scores.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export default function HighScores() {
-  const highScores = [
-    {
-      user: {
-        id: "foo",
-      },
-      score: 0,
-    },
-    {
-      user: {
-        id: "foo1",
-      },
-      score: 0,
-    },
-    {
-      user: {
-        id: "foo2",
-      },
-      score: 0,
-    },
-    {
-      user: {
-        id: "foo3",
-      },
-      score: 0,
-    },
-    {
-      user: {
-        id: "foo4",
-      },
-      score: 0,
-    },
-  ];
+interface WordScore {
+  word: string;
+  count: number;
+}
 
-  const topWords = [
-    {
-      word: "foo",
-      count: 0,
-    },
-    {
-      word: "foo1",
-      count: 0,
-    },
-    {
-      word: "foo2",
-      count: 0,
-    },
-    {
-      word: "foo3",
-      count: 0,
-    },
-    {
-      word: "foo4",
-      count: 0,
-    },
-  ];
+export const loader: LoaderFunction = async () => {
+  const defaultData: {
+    availableScores: WordScore[];
+    unavailableScores: WordScore[];
+  } = { availableScores: [], unavailableScores: [] };
+
+  const userScoreResponse = await axios
+    .get("/words/top")
+    .catch((error) => ({ data: defaultData }));
+
+  console.log(userScoreResponse.data);
+
+  return userScoreResponse?.data || defaultData;
+};
+
+export default function HighScores() {
+  const response = useLoaderData();
+  const { availableScores, unavailableScores } = response;
+
+  console.log({ response, availableScores, unavailableScores });
 
   return (
     <div className="high-scores page-wrapper container">
@@ -67,21 +38,21 @@ export default function HighScores() {
         <h1>High Scores</h1>
 
         <section className="user-scores list-wrapper col">
-          <h2 className="underlined-subtle">Users</h2>
+          <h2 className="underlined-subtle">Available</h2>
           <ol className="list">
-            {highScores.map((userScore) => (
+            {availableScores?.map((wordCount: WordScore) => (
               <li className="d-flex flex-row">
-                <span>{userScore.user.id}</span>
+                <span>{wordCount.word}</span>
                 <span className="spacer" />
-                <span>{userScore.score}</span>
+                <span>{wordCount.count}</span>
               </li>
             ))}
           </ol>
         </section>
         <section className="word-counts list-wrapper col">
-          <h2 className="underlined-subtle">Words</h2>
+          <h2 className="underlined-subtle">Unavailable</h2>
           <ol className="list">
-            {topWords.map((wordCount) => (
+            {unavailableScores?.map((wordCount: WordScore) => (
               <li className="d-flex flex-row">
                 <span>{wordCount.word}</span>
                 <span className="spacer" />
