@@ -6,8 +6,10 @@ import { axios } from "../utils/axios";
 
 // const GITHUB_CALLBACK_URL =
 //   "https://d95bb74e9fe7.ngrok.io/oauth/callback?provider=github";
+// const GITHUB_CLIENT_ID = "e42683918538cb70258c";
+
 const GITHUB_CALLBACK_URL = "https://npmpm.com/oauth/callback?provider=github";
-const GITHUB_CLIENT_ID = "e42683918538cb70258c";
+const GITHUB_CLIENT_ID = "84b9490ba64b345b8aab";
 
 const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_CALLBACK_URL}&scopes=user`;
 const TWITTER_URL = "";
