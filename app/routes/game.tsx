@@ -4,6 +4,7 @@ import {
   useLoaderData,
   useActionData,
   json,
+  useNavigate,
 } from "remix";
 import { useEffect, useState } from "react";
 import styles from "../styles/game.css";
@@ -115,6 +116,7 @@ export default function Game() {
   const [word, setWord] = useState("");
   const actionData = useActionData<ActionData>();
   // let userData = useLoaderData();
+  const navigate = useNavigate();
 
   const [accessToken, setAccessToken] = useState("");
   const [score, setScore] = useState("");
@@ -131,7 +133,12 @@ export default function Game() {
             Authorization: `Bearer ${accessToken}`,
           },
         })
-        .then((result) => setScore(result.data.score));
+        .then((result) => setScore(result.data.score))
+        .catch((error) => {
+          if (error?.response.status === 401) {
+            navigate("/login");
+          }
+        });
     }
   }, [accessToken]);
 

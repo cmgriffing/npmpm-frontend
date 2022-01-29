@@ -13,7 +13,7 @@ export default function Index() {
         Your mission, should you choose to accept it, is to find English words
         that are not already repos in NPM.
       </p>
-      <p>
+      <p className="description text-start">
         It's harder than you think. Check out the <Link to="/rules">Rules</Link>{" "}
         to find out more.
       </p>

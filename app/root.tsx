@@ -60,9 +60,9 @@ export default function App() {
         <footer className="underlined">
           <div className="footer d-flex align-items-center justify-content-center">
             <span className="spacer"></span>
-            <span>Not affiliated with NPM inc.</span>
+            <span className="footer-item">Not affiliated with NPM inc.</span>
             <span className="spacer"></span>
-            <span>
+            <span className="footer-item">
               Built with <a href="https://remix.run/">Remix</a> and{" "}
               <a href="https://arc.codes/">Architect</a>
             </span>

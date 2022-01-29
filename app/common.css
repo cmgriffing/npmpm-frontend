@@ -19,6 +19,10 @@ body {
   background-image: linear-gradient(139deg, #fed6af, #ffc5ad, #f3b9bb, #f3adff);
 }
 
+a {
+  color: black;
+}
+
 .page-wrapper {
   height: calc(100vh - 110px);
   display: flex;
@@ -117,4 +121,12 @@ header {
 
 .nav a {
   margin-right: 1rem;
+}
+
+.footer-item {
+  margin: 0 4px;
+}
+
+button {
+  margin-top: 10px;
 }
