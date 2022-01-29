@@ -78,7 +78,7 @@ export default function ADVC() {
           </>
         )}
 
-        {qrCode && !codeScanned && (
+        {qrCode && !codeScanned && !requestTimedOut && (
           <>
             <h2>Prerequisites</h2>
             <p>
