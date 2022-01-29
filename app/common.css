@@ -105,3 +105,16 @@ input:invalid {
 input:invalid:focus {
   box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 25%) !important;
 }
+
+.github-logo {
+  max-width: 40px;
+  height: auto;
+}
+
+header {
+  padding: 8px;
+}
+
+.nav a {
+  margin-right: 1rem;
+}

@@ -5,11 +5,12 @@ import {
   useActionData,
   json,
 } from "remix";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/game.css";
 
 import { axios } from "~/utils/axios";
 import { AxiosError } from "axios";
+import { getToken } from "~/utils/token";
 
 const wordPattern = "^[a-zA-Z]+$";
 const wordRegex = new RegExp(wordPattern);
@@ -93,20 +94,33 @@ function validateWord(word: string) {
   return true;
 }
 
-export const loader: LoaderFunction = async () => {
-  const userScoreResponse = await axios
-    .get("/users/self")
-    .catch((error) => ({ data: { score: 0 } }));
+// export const loader: LoaderFunction = async () => {
+//   const userScoreResponse = await axios
+//     .get("/users/self")
+//     .catch((error) => ({ data: { score: 0 } }));
 
-  return userScoreResponse?.data || { score: 0 };
-};
+//   return userScoreResponse?.data || { score: 0 };
+// };
 
 export default function Game() {
   const [word, setWord] = useState("");
   const actionData = useActionData<ActionData>();
-  let userData = useLoaderData();
+  // let userData = useLoaderData();
 
-  const score = userData.score;
+  const [accessToken, setAccessToken] = useState("");
+  const [score, setScore] = useState("");
+
+  useEffect(() => {
+    setAccessToken(getToken() || "");
+  }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+      axios.get("/users/self").then((result) => setScore(result.data.score));
+    }
+  }, [accessToken]);
+
+  // const score = userData.score;
   const wordIsValid = validateWord(word);
 
   return (
@@ -137,6 +151,8 @@ export default function Game() {
             pattern={wordPattern}
           />
         </div>
+
+        <input type="hidden" value={accessToken} />
 
         <div className="feedback-wrapper">
           {word === "" && <div>Enter a word to play.</div>}

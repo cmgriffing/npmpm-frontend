@@ -10,8 +10,14 @@ export default function Index() {
     <div className="index page-wrapper container">
       <h1>NPMPM: NPM Possible Match</h1>
       <p className="description text-start">
-        Something about the game goes here like the rules
+        Your mission, should you choose to accept it, is to find English words
+        that are not already repos in NPM.
       </p>
+      <p>
+        It's harder than you think. Check out the <Link to="/rules">Rules</Link>{" "}
+        to find out more.
+      </p>
+      <h3>Think you have what it takes?</h3>
       <Link to="/login" className="btn btn-primary">
         Get Started
       </Link>
