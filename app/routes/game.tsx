@@ -32,6 +32,7 @@ const badRequest = (data: ActionData) => json(data, { status: 400 });
 export const action: ActionFunction = async function ({ request }) {
   const form = await request.formData();
   const word = form.get("word");
+  const accessToken = form.get("accessToken");
 
   if (!word) {
     return badRequest({
@@ -40,7 +41,15 @@ export const action: ActionFunction = async function ({ request }) {
   }
 
   const apiResponse = await axios
-    .post("/words", { word })
+    .post(
+      "/words",
+      { word },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
     .catch((error: AxiosError) => error.response);
 
   console.log({ apiResponse }, apiResponse?.status);
@@ -116,7 +125,13 @@ export default function Game() {
 
   useEffect(() => {
     if (accessToken) {
-      axios.get("/users/self").then((result) => setScore(result.data.score));
+      axios
+        .get("/users/self", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((result) => setScore(result.data.score));
     }
   }, [accessToken]);
 
