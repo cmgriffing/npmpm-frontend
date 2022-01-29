@@ -167,7 +167,7 @@ export default function Game() {
           />
         </div>
 
-        <input type="hidden" value={accessToken} />
+        <input type="hidden" name="accessToken" value={accessToken} />
 
         <div className="feedback-wrapper">
           {word === "" && <div>Enter a word to play.</div>}
