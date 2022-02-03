@@ -7,8 +7,19 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
+export async function loader() {
+  return {
+    ENV: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+      GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+      BASE_URL: process.env.BASE_URL,
+    },
+  };
+}
+
 export default function Login() {
-  const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL } = (window as any).ENV;
+  const { ENV } = useLoaderData();
+  const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL } = ENV;
 
   const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_CALLBACK_URL}&scopes=user`;
   const TWITTER_URL = "";

@@ -105,19 +105,22 @@ function validateWord(word: string) {
   return true;
 }
 
-// export const loader: LoaderFunction = async () => {
-//   const userScoreResponse = await axios
-//     .get("/users/self")
-//     .catch((error) => ({ data: { score: 0 } }));
-
-//   return userScoreResponse?.data || { score: 0 };
-// };
+export async function loader() {
+  return {
+    ENV: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+      GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+      BASE_URL: process.env.BASE_URL,
+    },
+  };
+}
 
 export default function Game() {
   const [word, setWord] = useState("");
   const actionData = useActionData<ActionData>();
   // let userData = useLoaderData();
   const navigate = useNavigate();
+  const { ENV } = useLoaderData();
 
   const [accessToken, setAccessToken] = useState("");
   const [score, setScore] = useState("");
@@ -128,7 +131,7 @@ export default function Game() {
 
   useEffect(() => {
     if (accessToken) {
-      const axios = unauthenticatedAxios((window as any).ENV.BASE_URL);
+      const axios = unauthenticatedAxios(ENV.BASE_URL);
       axios
         .get("/users/self", {
           headers: {

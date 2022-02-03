@@ -28,16 +28,6 @@ export function links() {
   ];
 }
 
-export async function loader() {
-  return {
-    ENV: {
-      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-      GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
-      BASE_URL: process.env.BASE_URL,
-    },
-  };
-}
-
 export default function App() {
   const data = useLoaderData();
   const [accessToken, setAccessToken] = useState("");
@@ -53,11 +43,6 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
-          }}
-        />
       </head>
       <body>
         <header className="header d-flex text-end align-items-center">

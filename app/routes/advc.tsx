@@ -25,18 +25,27 @@ export const loader: LoaderFunction = async () => {
 
   console.log("response", qrCodeResponse);
 
-  return qrCodeResponse?.data || { qrCode: "", state: "" };
+  const ENV = {
+    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+    GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+    BASE_URL: process.env.BASE_URL,
+  };
+
+  return {
+    ...(qrCodeResponse?.data || { qrCode: "", state: "" }),
+    ENV,
+  };
 };
 
 export default function ADVC() {
   const navigate = useNavigate();
-  const { qrCode, state: loginState } = useLoaderData();
+  const { qrCode, state: loginState, ENV } = useLoaderData();
 
   const [codeScanned, setCodeScanned] = useState(false);
   const [requestTimedOut, setRequestTimedOut] = useState(false);
 
   useEffect(() => {
-    const axios = unauthenticatedAxios((window as any).ENV.BASE_URL);
+    const axios = unauthenticatedAxios(ENV.BASE_URL);
 
     let interval: NodeJS.Timer;
     if (qrCode && loginState) {
