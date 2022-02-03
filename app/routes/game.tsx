@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import styles from "../styles/game.css";
 
-import { axios } from "~/utils/axios";
+import { unauthenticatedAxios } from "~/utils/axios";
 import { AxiosError } from "axios";
 import { getToken } from "~/utils/token";
 
@@ -31,6 +31,7 @@ type ActionData = {
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async function ({ request }) {
+  const axios = unauthenticatedAxios(process.env.BASE_URL || "");
   const form = await request.formData();
   const word = form.get("word");
   const accessToken = form.get("accessToken");
@@ -127,6 +128,7 @@ export default function Game() {
 
   useEffect(() => {
     if (accessToken) {
+      const axios = unauthenticatedAxios((window as any).ENV.BASE_URL);
       axios
         .get("/users/self", {
           headers: {

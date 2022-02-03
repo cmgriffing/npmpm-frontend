@@ -8,7 +8,7 @@ import {
 } from "remix";
 import { setToken } from "~/utils/token";
 import styles from "../styles/advc.css";
-import { axios } from "../utils/axios";
+import { unauthenticatedAxios } from "../utils/axios";
 import { AdvcCallbackStatusCode } from "../utils/types";
 
 export function links() {
@@ -16,6 +16,8 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async () => {
+  const axios = unauthenticatedAxios(process.env.BASE_URL || "");
+
   const qrCodeResponse = await axios.get("/advc/login").catch((error) => {
     console.log("error", error);
     return { data: { qrCode: "", state: "" } };
@@ -34,6 +36,8 @@ export default function ADVC() {
   const [requestTimedOut, setRequestTimedOut] = useState(false);
 
   useEffect(() => {
+    const axios = unauthenticatedAxios((window as any).ENV.BASE_URL);
+
     let interval: NodeJS.Timer;
     if (qrCode && loginState) {
       // hit backend api on interval

@@ -1,15 +1,16 @@
 import Axios from "axios";
 import { redirect } from "remix";
 
-// const baseURL = "http://localhost:3333";
-const baseURL = "https://yzs3zsa9n7.execute-api.us-west-2.amazonaws.com";
+export function unauthenticatedAxios(baseURL: string) {
+  const axios = Axios.create({
+    baseURL,
+  });
 
-export const axios = Axios.create({
-  baseURL,
-});
+  return axios;
+}
 
 // only to be called from loader functions
-export function authenticatedAxios(token: string) {
+export function authenticatedAxios(baseURL: string, token: string) {
   const instance = Axios.create({
     baseURL,
     headers: {

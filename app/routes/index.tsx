@@ -8,6 +8,8 @@ export function links() {
 export default function Index() {
   return (
     <div className="index page-wrapper container">
+      <img className="logo" src="/logo.png" />
+
       <h1>NPMPM: NPM Possible Match</h1>
       <p className="description text-start">
         Your mission, should you choose to accept it, is to find English words
@@ -17,7 +19,7 @@ export default function Index() {
         It's harder than you think. Check out the <Link to="/rules">Rules</Link>{" "}
         to find out more.
       </p>
-      <h3>Think you have what it takes?</h3>
+      <h3 className="cta-title">Think you have what it takes?</h3>
       <Link to="/login" className="btn btn-primary">
         Get Started
       </Link>

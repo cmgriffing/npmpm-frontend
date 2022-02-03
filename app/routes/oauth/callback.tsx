@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, LoaderFunction, useLoaderData, useNavigate } from "remix";
-import { axios } from "~/utils/axios";
+import { unauthenticatedAxios } from "~/utils/axios";
 import { setToken } from "~/utils/token";
 import styles from "../../styles/index.css";
 
@@ -8,6 +8,8 @@ export let loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
   const provider = url.searchParams.get("provider");
   const code = url.searchParams.get("code");
+
+  const axios = unauthenticatedAxios(process.env.BASE_URL || "");
 
   console.log({ code, provider });
 

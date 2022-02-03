@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -6,6 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "remix";
 import type { MetaFunction } from "remix";
 import githubIcon from "./images/GitHub-Mark-64px.png";
@@ -26,7 +28,18 @@ export function links() {
   ];
 }
 
+export async function loader() {
+  return {
+    ENV: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+      GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+      BASE_URL: process.env.BASE_URL,
+    },
+  };
+}
+
 export default function App() {
+  const data = useLoaderData();
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -40,9 +53,21 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
       </head>
       <body>
-        <header className="header text-end">
+        <header className="header d-flex text-end align-items-center">
+          <Link className="title-link d-flex align-items-center" to="/">
+            <div className="logo-wrapper">
+              <img className="logo" src="/logo.png" />
+            </div>
+            <h2 className="header-title">NPMPM</h2>
+          </Link>
+          <div className="spacer"></div>
           <nav className="nav d-inline-block">
             <NavLink to="/rules">Rules</NavLink>
             {accessToken && (

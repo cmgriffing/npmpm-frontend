@@ -23,6 +23,10 @@ a {
   color: black;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 .page-wrapper {
   height: calc(100vh - 110px);
   display: flex;
@@ -35,6 +39,27 @@ a {
 
 .header {
   height: 60px;
+  width: 100%;
+}
+
+.title-link {
+  text-decoration: none
+}
+
+.logo-wrapper {
+  width: 42px;
+  height: 42px;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.header-title {
+  margin: 0;
+  padding-left: 10px;
+  margin-bottom: -10px;
 }
 
 .footer {

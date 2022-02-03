@@ -1,4 +1,4 @@
-# NPMPM
+# NPMPM Frontend
 
 This is the frontend repo for [npmpm.com](https://npmpm.com). It is built with [Remix](https://remix.run). The main reason for creating it was to showcase the Microsoft Identity Verifiable Credentials APIs. But it's also just a fun game to play.
 
