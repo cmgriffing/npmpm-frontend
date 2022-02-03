@@ -2,3 +2,37 @@
   width: 240px;
   margin-top: 20px;
 }
+
+.btn-logo {
+  height: auto;
+  margin: 0 4px;
+  width: 20px;
+}
+
+.btn-github {
+  background: black;
+  border-color: #555;
+}
+
+.btn-github:focus,
+.btn-github:not(.disabled):active,
+.btn-github:not(.disabled):hover {
+  background: #333;
+  border-color: #777;
+}
+
+.btn-twitch {
+  background: #9146ff;
+  border-color: #9660e6;
+}
+
+.btn-twitch .btn-logo {
+  width: 16px;
+}
+
+.btn-twitch:focus,
+.btn-twitch:not(.disabled):active,
+.btn-twitch:not(.disabled):hover {
+  background: #9660e6;
+  border-color: #996ed8;
+}
