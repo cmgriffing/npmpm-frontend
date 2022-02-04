@@ -49,6 +49,13 @@ export default function OAuth() {
           <p>
             Please try <Link to="/login">logging in</Link> again
           </p>
+          <p>
+            If the problem persists please{" "}
+            <a href="https://github.com/cmgriffing/npmpm-frontend">
+              create an issue
+            </a>{" "}
+            on Github
+          </p>
         </>
       )}
 

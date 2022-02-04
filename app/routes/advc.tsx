@@ -88,6 +88,13 @@ export default function ADVC() {
           <>
             <h1>Error generating QR Code.</h1>
             <p>Please refresh and try again.</p>
+            <p>
+              If the problem persists please{" "}
+              <a href="https://github.com/cmgriffing/npmpm-frontend">
+                create an issue
+              </a>{" "}
+              on Github
+            </p>
           </>
         )}
 
@@ -121,6 +128,13 @@ export default function ADVC() {
           <>
             <h3>Request timed out.</h3>
             <p>Please refresh and try again.</p>
+            <p>
+              If the problem persists please{" "}
+              <a href="https://github.com/cmgriffing/npmpm-frontend">
+                create an issue
+              </a>{" "}
+              on Github
+            </p>
           </>
         )}
       </div>
