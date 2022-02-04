@@ -176,6 +176,7 @@ export default function Game() {
             minLength={3}
             maxLength={10}
             pattern={wordPattern}
+            autoFocus
           />
         </div>
 
