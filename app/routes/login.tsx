@@ -17,6 +17,7 @@ export async function loader() {
       BASE_URL: process.env.BASE_URL,
       TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
       TWITCH_CALLBACK_URL: process.env.TWITCH_CALLBACK_URL,
+      ADVC_ENABLED: process.env.ADVC_ENABLED === "true",
     },
   };
 }
@@ -28,6 +29,7 @@ export default function Login() {
     GITHUB_CALLBACK_URL,
     TWITCH_CLIENT_ID,
     TWITCH_CALLBACK_URL,
+    ADVC_ENABLED,
   } = ENV;
 
   const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_CALLBACK_URL}&scopes=user`;
@@ -43,22 +45,27 @@ export default function Login() {
       <div className="row">
         <h1>Login</h1>
 
+        {ADVC_ENABLED && (
+          <section className="login-list list-wrapper col">
+            <h2 className="underlined-subtle">Session Based</h2>
+            <a
+              className="btn btn-primary btn-microsoft d-block m-2"
+              href="/advc"
+            >
+              Microsoft Identity
+            </a>
+            <details className="text-start">
+              <summary>Scores are only related to each login session.</summary>
+              <p>
+                Due to a bug in the Microsoft Identity process, we are not able
+                to associate a VC to a persistent ID at this time. They are
+                actively working on it.
+              </p>
+            </details>
+          </section>
+        )}
         <section className="login-list list-wrapper col">
-          <h2 className="underlined-subtle">Session Based</h2>
-          <a className="btn btn-primary btn-microsoft d-block m-2" href="/advc">
-            Microsoft Identity
-          </a>
-          <details className="text-start">
-            <summary>Scores are only related to each login session.</summary>
-            <p>
-              Due to a bug in the Microsoft Identity process, we are not able to
-              associate a VC to a persistent ID at this time. They are actively
-              working on it.
-            </p>
-          </details>
-        </section>
-        <section className="login-list list-wrapper col">
-          <h2 className="underlined-subtle">Persistent</h2>
+          {ADVC_ENABLED && <h2 className="underlined-subtle">Persistent</h2>}
           <a
             className="btn btn-primary btn-github d-block m-2"
             href={GITHUB_URL}

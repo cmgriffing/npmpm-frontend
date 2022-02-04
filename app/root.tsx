@@ -66,6 +66,14 @@ export default function App() {
             <img className="github-logo" src={githubIcon} />
           </a>
         </header>
+        <noscript>
+          <h1>This app currently requires the use of JS.</h1>
+          <p>
+            We would like to support progressive enhancement but our current
+            framework doesn't allow for meta refresh tags in the head of the
+            document.
+          </p>
+        </noscript>
         <Outlet />
         <footer className="underlined">
           <div className="footer d-flex align-items-center justify-content-center">
