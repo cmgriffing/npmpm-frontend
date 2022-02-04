@@ -43,6 +43,11 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          defer
+          data-domain="npmpm.com"
+          src="https://plausible.io/js/plausible.js"
+        ></script>
       </head>
       <body>
         <header className="header d-flex text-end align-items-center">
