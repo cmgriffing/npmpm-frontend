@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { NavigateFunction } from "react-router";
 import { redirect } from "remix";
 
 export function unauthenticatedAxios(baseURL: string) {

@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import styles from "../styles/game.css";
 
-import { unauthenticatedAxios } from "~/utils/axios";
+import { authenticatedAxios, unauthenticatedAxios } from "~/utils/axios";
 import { AxiosError } from "axios";
 import { getToken } from "~/utils/token";
 
@@ -31,10 +31,13 @@ type ActionData = {
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async function ({ request }) {
-  const axios = unauthenticatedAxios(process.env.BASE_URL || "");
   const form = await request.formData();
   const word = form.get("word");
-  const accessToken = form.get("accessToken");
+  const accessToken = form.get("accessToken") as string;
+  const axios = authenticatedAxios(
+    process.env.BASE_URL || "",
+    accessToken || ""
+  );
 
   if (!word) {
     return badRequest({
@@ -43,15 +46,7 @@ export const action: ActionFunction = async function ({ request }) {
   }
 
   const apiResponse = await axios
-    .post(
-      "/words",
-      { word },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
+    .post("/words", { word })
     .catch((error: AxiosError) => error.response);
 
   console.log({ apiResponse }, apiResponse?.status);
@@ -131,16 +126,12 @@ export default function Game() {
 
   useEffect(() => {
     if (accessToken) {
-      const axios = unauthenticatedAxios(ENV.BASE_URL);
+      const axios = authenticatedAxios(ENV.BASE_URL, accessToken);
       axios
-        .get("/users/self", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
+        .get("/users/self")
         .then((result) => setScore(result.data.score))
         .catch((error) => {
-          if (error?.response.status === 401) {
+          if (!error?.response?.status || error.response.status === 401) {
             navigate("/login");
           }
         });
