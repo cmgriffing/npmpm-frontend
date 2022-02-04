@@ -28,7 +28,7 @@ a {
 }
 
 .page-wrapper {
-  height: calc(100vh - 110px);
+  min-height: calc(100vh - 110px);
   display: flex;
   flex-direction: column;
   width: 100vw;
