@@ -57,6 +57,7 @@ export default function Login() {
       <div className="row">
         <h1>High Scores</h1>
         <p>We have hidden words you haven't guessed, yet. No cheating.</p>
+        <p>User rankings are currently unavailable</p>
         <section className="high-score-list list-wrapper col">
           <h2 className="underlined-subtle">Available</h2>
           {isLoading && <div className="loader"></div>}
