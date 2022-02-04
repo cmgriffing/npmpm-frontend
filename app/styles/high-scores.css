@@ -13,3 +13,8 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.loader {
+  font-size: 6px;
+  margin: 10px auto;
+}

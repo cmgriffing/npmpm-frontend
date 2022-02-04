@@ -112,6 +112,8 @@ export async function loader() {
 
 export default function Game() {
   const [word, setWord] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const actionData = useActionData<ActionData>();
   // let userData = useLoaderData();
   const navigate = useNavigate();
@@ -129,7 +131,10 @@ export default function Game() {
       const axios = authenticatedAxios(ENV.BASE_URL, accessToken);
       axios
         .get("/users/self")
-        .then((result) => setScore(result.data.score))
+        .then((result) => {
+          setScore(result.data.score);
+          setIsLoading(false);
+        })
         .catch((error) => {
           if (!error?.response?.status || error.response.status === 401) {
             navigate("/login");
@@ -143,11 +148,15 @@ export default function Game() {
 
   return (
     <div className="game page-wrapper container">
-      <h1>Your Score: {score}</h1>
+      <h1>
+        Your Score: {isLoading && <div className="loader score-loader"></div>}
+        {!isLoading && score}
+      </h1>
 
       <form
         method="post"
         onSubmit={() => {
+          setIsSubmitting(true);
           setTimeout(() => {
             setWord("");
           }, 100);
@@ -194,7 +203,7 @@ export default function Game() {
           {actionData && actionData?.message && actionData?.score === 0 && (
             <>
               <div className="failure">
-                Failure! "{actionData?.fields?.word}" a repo in npm already.
+                Failure! "{actionData?.fields?.word}" is a repo in npm already.
               </div>
               <h2>0 points</h2>
             </>
@@ -215,7 +224,7 @@ export default function Game() {
 
         <div className="submit-button">
           <button className="btn btn-primary" disabled={!wordIsValid}>
-            Submit
+            Submit {isSubmitting && <div className="loader"></div>}
           </button>
         </div>
       </form>

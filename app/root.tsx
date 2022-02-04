@@ -58,7 +58,7 @@ export default function App() {
             {accessToken && (
               <>
                 <NavLink to="/game">Game</NavLink>
-                {/* <NavLink to="/high-scores">High Scores</NavLink> */}
+                <NavLink to="/high-scores">High Scores</NavLink>
               </>
             )}
           </nav>

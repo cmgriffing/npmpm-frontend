@@ -9,3 +9,17 @@
 .feedback-wrapper {
   width: 360px;
 }
+
+.loader {
+  font-size: 2px;
+  color: white;
+  margin: 8px 10px;
+  display: inline-block;
+}
+
+.score-loader {
+  font-size: 2px;
+  color: black;
+  margin: 12px 8px;
+  display: inline-block;
+}
