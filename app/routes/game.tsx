@@ -135,7 +135,12 @@ export default function Game() {
   const [score, setScore] = useState("");
 
   useEffect(() => {
-    setAccessToken(getToken() || "");
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+    } else {
+      setAccessToken(token || "");
+    }
   }, []);
 
   useEffect(() => {
