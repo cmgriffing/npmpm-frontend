@@ -28,7 +28,7 @@ a {
 }
 
 .page-wrapper {
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 136px);
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -63,7 +63,7 @@ a {
 }
 
 .footer {
-  height: 40px;
+  min-height: 60px;
 }
 
 .underlined::after {
@@ -149,7 +149,8 @@ header {
 }
 
 .footer-item {
-  margin: 0 4px;
+  padding: 8px;
+  text-align: center;
 }
 
 button {

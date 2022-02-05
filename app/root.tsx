@@ -95,18 +95,23 @@ export default function App() {
           </p>
         </noscript>
         <Outlet />
-        <footer className="underlined">
-          <div className="footer d-flex align-items-center justify-content-center">
-            <span className="spacer"></span>
-            <span className="footer-item">Not affiliated with NPM inc.</span>
-            <span className="spacer"></span>
-            <span className="footer-item">
-              Built with <a href="https://remix.run/">Remix</a> and{" "}
-              <a href="https://arc.codes/">Architect</a>
+        <footer>
+          <div className="footer d-flex align-items-center flex-wrap">
+            <span className="footer-item col col-xs-12 col-sm-6 col-md-3">
+              Not affiliated with <a href="https://npmjs.com">NPM inc.</a>
             </span>
-            <span className="spacer"></span>
+            <span className="footer-item col col-xs-12 col-sm-6 col-md-3">
+              Frontend built with <a href="https://remix.run/">Remix</a>
+            </span>
+            <span className="footer-item col col-xs-12 col-sm-6 col-md-3">
+              Backend built with <a href="https://arc.codes/">Architect</a>
+            </span>
+            <span className="footer-item col col-xs-12 col-sm-6 col-md-3">
+              Hosted on <a href="https://vercel.com/">Vercel</a>
+            </span>
           </div>
         </footer>
+        <div className="underlined mt-2"></div>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
