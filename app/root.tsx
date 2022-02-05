@@ -17,8 +17,19 @@ import commonStyles from "./common.css";
 import { useEffect, useState } from "react";
 import { getToken } from "./utils/token";
 
+/*
+<meta property="og:url" content="https://npmpm.com" />
+<meta property="og:image" content="https://npmpm.com/logo.png" />
+*/
+
 export const meta: MetaFunction = () => {
-  return { title: "NPMPM: NPM Possible Match" };
+  return {
+    title: "NPMPM: NPM Possible Match",
+    "og:title": "NPMPM: NPM Possible Match",
+    "og:type": "website",
+    "og:url": "https://npmpm.com",
+    "og:image": "https://npmpm.com/logo.png",
+  };
 };
 
 export function links() {
