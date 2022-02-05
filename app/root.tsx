@@ -26,6 +26,10 @@ export const meta: MetaFunction = () => {
   return {
     title: "NPMPM: NPM Possible Match",
     "og:title": "NPMPM: NPM Possible Match",
+    description:
+      "Do you have what it takes to find words that aren't NPM repos yet? It's harder than you think.",
+    "og:description":
+      "Do you have what it takes to find words that aren't NPM repos yet? It's harder than you think.",
     "og:type": "website",
     "og:url": "https://npmpm.com",
     "og:image": "https://npmpm.com/logo.png",
