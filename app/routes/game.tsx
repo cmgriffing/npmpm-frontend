@@ -13,6 +13,10 @@ import { authenticatedAxios, unauthenticatedAxios } from "~/utils/axios";
 import { AxiosError } from "axios";
 import { getToken } from "~/utils/token";
 
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 const wordPattern = "^[a-zA-Z]+$";
 const wordRegex = new RegExp(wordPattern);
 
@@ -26,6 +30,13 @@ type ActionData = {
   };
   message?: string;
   score?: number;
+  repo?: {
+    name: string;
+    description: string;
+    url: string;
+    version: string;
+    lastUpdated: string;
+  };
 };
 
 const badRequest = (data: ActionData) => json(data, { status: 400 });
@@ -63,7 +74,7 @@ export const action: ActionFunction = async function ({ request }) {
     });
   }
 
-  const { score } = apiResponse?.data;
+  const { score, repo } = apiResponse?.data;
 
   let message = "Success!";
 
@@ -77,6 +88,7 @@ export const action: ActionFunction = async function ({ request }) {
     fields: {
       word,
     },
+    repo,
   };
 };
 
@@ -230,6 +242,32 @@ export default function Game() {
             Submit {isSubmitting && <div className="loader"></div>}
           </button>
         </div>
+
+        {actionData && actionData?.repo && actionData?.score === 0 && (
+          <div className="repo-details">
+            <h3>Repo details:</h3>
+            <a href={actionData.repo.url} className="repo-link text-start">
+              <div className="d-flex">
+                <div>
+                  <span className="label">Name:</span> {actionData.repo.name}
+                </div>
+                <div className="spacer"></div>
+                <div>
+                  <span className="label">Version:</span>{" "}
+                  {actionData.repo.version}
+                </div>
+              </div>
+              <div>
+                <span className="label">Description:</span>{" "}
+                {actionData.repo.description}
+              </div>
+              <div>
+                <span className="label">Last Updated:</span>{" "}
+                {dayjs().to(dayjs(actionData.repo.lastUpdated))}
+              </div>
+            </a>
+          </div>
+        )}
       </form>
     </div>
   );

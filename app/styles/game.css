@@ -23,3 +23,16 @@
   margin: 12px 8px;
   display: inline-block;
 }
+
+.repo-details {
+  max-width: 320px;
+  margin: 28px auto;
+}
+
+.repo-link {
+  text-decoration: none;
+}
+
+.label {
+  font-weight: 700;
+}
